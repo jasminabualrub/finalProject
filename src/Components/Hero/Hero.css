@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Satisfy&display=swap");
+.Hero {
+  position: relative;
+  height: calc(100vh - 100px);
+  width: 100%;
+  background-image: url("../../public/men.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  animation: changeimg;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+}
+
+@keyframes changeimg {
+  0% {
+    background-image: url(../../public/men.jpg);
+  }
+  50% {
+    background-image: url(../../public/women.jpg);
+  }
+  100% {
+    background-image: url(../../public/headphone.webp);
+  }
+}
+
+.content-text {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 40%;
+}
+.content-text h1 {
+  font-size: 4vw;
+  font-family: "Satisfy", cursive;
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+.content-text h1 span {
+  color: #d4b9a9;
+}

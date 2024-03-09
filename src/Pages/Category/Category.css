@@ -1,0 +1,34 @@
+.productCategory{
+    padding: 10px 20px;
+}
+.productCategoryTitle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px;
+    font-weight: 200;   
+}
+.Products{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+   
+}
+ .product {
+    border: 1px solid #ccc;
+    background-color: #d6ccc2;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+  }
+.Products img{
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
