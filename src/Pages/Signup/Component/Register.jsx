@@ -2,7 +2,11 @@ import { useState } from "react";
 import { object, string } from "yup";
 import axios from "axios";
 import { Zoom, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import 'bootstrap'
 function Signup() {
+  const navigate=useNavigate();
+  const [loader, setLoader] = useState(false);
   const [errors, setError] = useState([]);
   const [user, setUser] = useState({
     userName: "",
@@ -38,12 +42,14 @@ function Signup() {
     } catch (err) {
       console.log("validation error", err.errors);
       setError(err.errors);
+      setLoader(false);
       return false;
     }
   };
 
   const handelSubmit = async (e) => {
     e.preventDefault();
+    setLoader(true);
     const validate = await validateData();
     console.log(validate);
     const formData = new FormData();
@@ -62,7 +68,10 @@ function Signup() {
         password: "",
         image: "",
       });
+    
+      console.log(data);
       if (data.message == "success") {
+        navigate('/signin')
         toast.success("Your Account has been created successfully", {
           position: "bottom-center",
           autoClose: 6000,
@@ -91,6 +100,8 @@ function Signup() {
         });
       }
       console.log(err);
+    } finally {
+      setLoader(false);
     }
 
     /* const {data}=await axios.post(`${import.meta.env.VITE_API_URL}/auth/signup`,{user});*/ //هاي عشان ابعث الداتا عن طريق البودي بحط البراميتر هو اليوزر
@@ -106,6 +117,7 @@ function Signup() {
           name="userName"
           value={user.userName}
           onChange={handelChange}
+          className="form-control"
         />
 
         <label>email:</label>
@@ -114,6 +126,7 @@ function Signup() {
           name="email"
           value={user.email}
           onChange={handelChange}
+          className="form-control"
         />
         <label>password:</label>
         <input
@@ -121,11 +134,12 @@ function Signup() {
           name="password"
           value={user.password}
           onChange={handelChange}
+className="form-control"
         />
         <label>image:</label>
-        <input type="file" name="image" onChange={handelImageChange} />
+        <input  className="form-control" type="file" name="image" onChange={handelImageChange} />
         {/*ممنوع احط الفاليو لما يكون نوع الداتا فايل */}
-        <button type="submit">Submit</button>
+        <button type="submit"className= "btn btn-outline-success" disabled={loader?'disabled':null}>{!loader ? "register" : "wait..."}</button>
       </form>
     </>
   );

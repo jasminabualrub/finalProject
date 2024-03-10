@@ -17,6 +17,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Products from "./Pages/Products/Products";
 import Category from './Pages/Category/Category';
+import ProductsRoutes from "./auth/ProductsRoute/ProductsRoutes";
+import UnProtectedRoutes from "./auth/UnProtectedRoutes";
 
 
 
@@ -35,12 +37,20 @@ const router = createBrowserRouter([
         element: <About />,
       },
       {
+       
         path: "/signin",
-        element: <Signin />,
+        element: 
+        <UnProtectedRoutes>
+          <Signin />
+          </UnProtectedRoutes>
+        ,
       },
       {
         path: "/signup",
-        element: <Signup />,
+        element: <UnProtectedRoutes>
+          <Signup />
+          </UnProtectedRoutes>
+        ,
       },
       {
         path: "/forgetpassward",
@@ -57,7 +67,9 @@ const router = createBrowserRouter([
     
       {
         path: "/products/",
-        element: <Products/>
+        element: <ProductsRoutes>
+               <Products/>
+            </ProductsRoutes>
       },
       {
         path: "/product/:_id",
