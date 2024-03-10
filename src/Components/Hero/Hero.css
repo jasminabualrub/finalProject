@@ -3,7 +3,7 @@
   position: relative;
   height: calc(100vh - 100px);
   width: 100%;
-  background-image: url("men.jpg");
+  background-image: url("../../../public/men.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   animation: changeimg;
@@ -16,13 +16,13 @@
 
 @keyframes changeimg {
   0% {
-    background-image: url(men.jpg);
+    background-image: url("../../../public/headphone.webp");
   }
   50% {
-    background-image: url(women.jpg);
+    background-image: url("../../../public/women.jpg");
   }
   100% {
-    background-image: url(headphone.webp);
+    background-image: url("../../../public/men.jpg");
   }
 }
 
