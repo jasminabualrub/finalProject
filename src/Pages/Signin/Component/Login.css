@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container{
+  background-color: #F5EBE0;
+position: relative;
+
+}
+.formStyle {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-direction: column !important;
+  background-color: rgba(213, 189, 175, 0.5) !important;
+  
+  width: 50% !important;
+  height: fit-content !important;
+  gap:20px;
+  text-align: center;
+  margin: auto;
+  padding: 20px;
+  border-radius: 10px;
+}
+.formStyle h1 {
+  text-align: center;
+}
+.email-container {
+ display: flex;
+ flex-direction: column;
+  align-items: center;
+  gap:8px;
+}
+email-container input{
+  width: 200px;
+  height: fit-content;
+  border: 1px solid #D5BDAF;
+  border-radius: 5px;
+  padding: 10px;
+}
+.passward-container{
+  display: flex;
+  flex-direction: column;
+   align-items: center;
+   gap:8px;
+}

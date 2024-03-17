@@ -19,6 +19,9 @@ import Products from "./Pages/Products/Products";
 import Category from './Pages/Category/Category';
 import ProductsRoutes from "./auth/ProductsRoute/ProductsRoutes";
 import UnProtectedRoutes from "./auth/UnProtectedRoutes";
+import ProductDetail from "./Pages/ProductsDetail/ProductDetail";
+import UserContextProvider from "./Context/User";
+import Logout from "./Pages/Logout/Logout";
 
 
 
@@ -34,7 +37,9 @@ const router = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <About />,
+        element: <UserContextProvider>
+       <About /></UserContextProvider>,
+        
       },
       {
        
@@ -64,12 +69,22 @@ const router = createBrowserRouter([
         path: "/category/:_id",
         element: <Category/>,
       },
+      {
+        path: "/productdetail/:_id",
+        element: <ProductDetail/>,
+      },
     
       {
-        path: "/products/",
+        path: "/products",
         element: <ProductsRoutes>
                <Products/>
             </ProductsRoutes>
+      },
+      {
+        path: "/logout",
+        element: 
+               <Logout/>
+           
       },
       {
         path: "/product/:_id",
@@ -99,7 +114,8 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-      <RouterProvider router={router} />
+    <UserContextProvider> <RouterProvider router={router} /></UserContextProvider>
+     
       <ToastContainer />
     </>
   );

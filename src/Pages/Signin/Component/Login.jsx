@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { object, string} from 'yup';
 import axios from "axios";
 import { Zoom, toast } from "react-toastify";
 import Loader from './../../../Components/Loader/Loader';
 import 'bootstrap' 
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import './Login.css'
+import '../../../Context/User'
+import { UserContext } from "../../../Context/User";
 function Login() {
+  const {setUserToken}=useContext(UserContext);
   const navigate=useNavigate();
   const [errors,setError]=useState([]);
   const[loader,setLoader]=useState(false);
@@ -53,7 +57,7 @@ return false;}
       password: "",
       image: "",
     });
-    localStorage.setItem("userToken", data.token);
+    
     if (data.message == "success") {
       
       toast.success("you are success to login", {
@@ -67,6 +71,8 @@ return false;}
         theme: "colored",
         transition: Zoom,
       });
+      localStorage.setItem("userToken", data.token);
+      setUserToken(data.token);
       navigate('/')
     }
     console.log(data);
@@ -97,28 +103,47 @@ return false;}
 
   return (
     <>
-      <div>Login</div>
+      
  {errors.length > 0?errors.map(error=><p>{error}</p>):''}
-      <form onSubmit={handelSubmit}>
+ <div className='formStyle'>
+  <h1>Login</h1>
+ <form onSubmit={handelSubmit}>
       
-
-        <label>email:</label>
-        <input className="form-control"
-          type="email"
-          name="email"
-          value={user.email}
-          onChange={handelChange}
-        />
-        <label>password:</label>
-        <input className="form-control"
-          type="password"
-          name="password"
-          value={user.password}
-          onChange={handelChange}
-        />
+<div className="email-container">
+<label>Email:</label>
+      <input className="form-control"
+        type="email"
+        name="email"
+        value={user.email}
+        onChange={handelChange}
+      />
+</div>
+      <div className="passward-container"><label>Password:</label>
+      <input className="form-control"
+        type="password"
+        name="password"
+        value={user.password}
+        onChange={handelChange}
+      /></div>
       
-        <button type="submit"  className= "btn btn-outline-success" disabled={loader?'disabled':null}>{!loader?'login':<Loader/>}</button>
-      </form>
+      <div className="remember-forgot">
+      <label><input type='checkbox'/>Remmember me</label>
+      <Link to={`/forgetpassward`}><span>Forgot Passward ?</span></Link>
+      
+      </div>
+      
+    
+      <button type="submit"  className= "btn btn-outline-success" disabled={loader?'disabled':null}>{!loader?'login':'Wait...'}</button>
+      <div className="register-link">
+      Dont have an acount?
+      <Link to={`/signup`}>
+      <span>Register?</span>
+      </Link>
+      
+      </div>
+    </form>
+ </div>
+      
     </>
   );
   }

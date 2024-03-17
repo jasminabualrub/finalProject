@@ -1,17 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Satisfy&display=swap");
 .Hero {
+  
   position: relative;
-  height: calc(100vh - 100px);
+ 
+  height: 600px;
   width: 100%;
   background-image: url("../../../public/men.jpg");
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
   animation: changeimg;
   animation-duration: 10s;
   animation-iteration-count: infinite;
   display: flex;
   align-items: center;
   padding-left: 30px;
+  z-index: 0;
 }
 
 @keyframes changeimg {

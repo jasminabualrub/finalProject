@@ -4,13 +4,13 @@ import Footer from "./../Components/Footer/Footer";
 
 function Root() {
   return (
-    <>
+    <div className="container ">
       <Navbar />
-      
+    
       <Outlet />
      
       <Footer />
-    </>
+    </div>
   );
 }
 

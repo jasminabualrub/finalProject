@@ -4,6 +4,7 @@ import axios from "axios";
 import { Zoom, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import 'bootstrap'
+import './Register.css'
 function Signup() {
   const navigate=useNavigate();
   const [loader, setLoader] = useState(false);
@@ -108,10 +109,13 @@ function Signup() {
   };
   return (
     <>
-      <div>Register</div>
+      
       {errors.length > 0 ? errors.map((error) => <p>{error}</p>) : ""}
+      <div className="register-container">
       <form onSubmit={handelSubmit}>
-        <label>userName:</label>
+        <h1>Register</h1>
+        <div className='username-container'>
+        <label>userName</label>
         <input
           type="text"
           name="userName"
@@ -119,8 +123,10 @@ function Signup() {
           onChange={handelChange}
           className="form-control"
         />
-
-        <label>email:</label>
+        </div>
+        
+<div className="email-container">
+<label>Email</label>
         <input
           type="email"
           name="email"
@@ -128,19 +134,24 @@ function Signup() {
           onChange={handelChange}
           className="form-control"
         />
-        <label>password:</label>
+</div>
+        
+        <div className="pass-container"><label>Password</label>
         <input
           type="password"
           name="password"
           value={user.password}
           onChange={handelChange}
 className="form-control"
-        />
-        <label>image:</label>
+        /></div>
+        <div className="img-container"><label>Image</label>
         <input  className="form-control" type="file" name="image" onChange={handelImageChange} />
-        {/*ممنوع احط الفاليو لما يكون نوع الداتا فايل */}
+        {/*ممنوع احط الفاليو لما يكون نوع الداتا فايل */}</div>
+        
         <button type="submit"className= "btn btn-outline-success" disabled={loader?'disabled':null}>{!loader ? "register" : "wait..."}</button>
       </form>
+      </div>
+     
     </>
   );
 }

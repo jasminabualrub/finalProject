@@ -2,7 +2,7 @@ import "./Hero.css";
 import 'bootstrap'
 const Hero = () => {
   return (
-    <div className="Hero">
+    <div className="Hero ">
 
       <div className="content-text ">
         <h1>

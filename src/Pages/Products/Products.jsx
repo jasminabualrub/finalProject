@@ -41,7 +41,7 @@ function Products() {
             <img src={e.mainImage.secure_url} alt={e.name} />
 			<h6>{e.name}</h6>
 			<p>${e.price}</p>
-			<Link to={`/Category/${e._id}`}>
+			<Link to={`/productdetail/${e._id}`}>
 				<button className="btn-style">View More</button>
 			</Link>
           </div>
