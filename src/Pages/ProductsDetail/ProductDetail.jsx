@@ -1,10 +1,14 @@
 import { useParams } from "react-router-dom";
 import Loader from "./../../Components/Loader/Loader";
 import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { UserContext } from "../../Context/User";
 import axios from "axios";
+import 'bootstrap'
 import './ProductDetail.css'
 import { Zoom, toast } from "react-toastify";
 function ProductDetail() {
+  const {AuthName }=useContext(UserContext);
     const {_id}=useParams();
     const [error, setError] = useState("");
     const [loader, setLoader] = useState(true);
@@ -77,7 +81,7 @@ return(<div  className="detail-container">
     
         <div className="productdetail" key={productdetail._id}>
             <h2>{productdetail.name}</h2>
-         <img src={productdetail.mainImage.secure_url} alt={productdetail.name} />
+         <img  className="img-fluid"src={productdetail.mainImage.secure_url} alt={productdetail.name} />
         
          <div className="productdetailSubImage">
          {productdetail.subImages.map((e)=>{
@@ -86,7 +90,8 @@ return(<div  className="detail-container">
          </div>
          <p>{productdetail.description}</p>
          <span>{productdetail.price}$</span> 
-         <button onClick={()=>addToCart(productdetail._id)}>Add to Cart</button> 
+         {AuthName ?<><button onClick={()=>addToCart(productdetail._id)}>Add to Cart</button> </>:<></>}
+         
            
         </div>
        

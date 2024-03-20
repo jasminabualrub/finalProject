@@ -7,6 +7,7 @@ import {Link} from "react-router-dom"
 function Category() {
   const { _id } = useParams();
   console.log(_id);
+  const [categor, setCategor] = useState({})
   const [error, setError] = useState("");
   const [loader, setLoader] = useState(true);
   const [categoryProducts, setCategory] = useState([]);
@@ -25,8 +26,22 @@ function Category() {
       setLoader(false);
     }
   };
+  async function getCategoryInfo() {
+		try {
+			const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/categories/${_id}`)
+			if (data.message == 'success') {
+				setCategor(data.category)
+			}
+		} catch (err) {
+			console.log(err);
+      setError("Error to load your data :(");
+		} finally {
+			setLoader(false);
+		}
+	}
   useEffect(() => {
     getCategoryElement();
+    getCategoryInfo();
   }, []);
   if (loader) {
     return <Loader />;
@@ -34,11 +49,11 @@ function Category() {
   return (
     <div className='productCategory'>
       <div className='productCategoryTitle'>
-				<h3>Products for category {categoryProducts.name}</h3>
-				<img src={categoryProducts?.image?.secure_url || ''} alt="" width={50} />
+				<h3>Products for category <span>{categor.name}</span></h3>
+				<img src={categor.image.secure_url } alt="" width={50} />
 			</div>
       {error ? <p>{error}</p> : null}
-      <div className='Products'>
+      <div className='Products' >
       { categoryProducts.length > 0 ?categoryProducts.map((e) => (
         <div className="product" key={e._id}>
           <img src={e.mainImage.secure_url} />

@@ -22,6 +22,7 @@ import UnProtectedRoutes from "./auth/UnProtectedRoutes";
 import ProductDetail from "./Pages/ProductsDetail/ProductDetail";
 import UserContextProvider from "./Context/User";
 import Logout from "./Pages/Logout/Logout";
+import SendCode from "./Pages/SendCode/SendCode";
 
 
 
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
+        path: "/sendcode",
+        element: <SendCode />,
+      },
+      {
         path: "/about",
         element: <UserContextProvider>
        <About /></UserContextProvider>,
@@ -45,9 +50,9 @@ const router = createBrowserRouter([
        
         path: "/signin",
         element: 
-        <UnProtectedRoutes>
+        
           <Signin />
-          </UnProtectedRoutes>
+         
         ,
       },
       {

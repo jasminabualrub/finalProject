@@ -30,7 +30,7 @@ const logout=()=>{
 
       <nav className="navbar navbar-expand-lg bg-body-tertiary" style={{height: '70px'}}>
         <div className="container-fluid" style={{height: "100%", display: "flex", alignItems: "center,",backgroundColor:" rgba(255,255, 255, 1) "}}>
-          <NavLink className="navbar-brand font d-flex justify-content-center align-items-center  col-4" to="#">
+          <NavLink className="navbar-brand font d-flex justify-content-center align-items-center  col-2" to="#">
             <span>F</span>it<span>M</span>e
           </NavLink>
           <button
@@ -46,7 +46,7 @@ const logout=()=>{
             <span className="navbar-toggler-icon " />
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mt-2 mb-2 mb-lg-2 col-4">
+            <ul className="navbar-nav me-auto mt-2 mb-2 mb-lg-2 col-7">
               <li className="nav-item">
                 <NavLink className="nav-link " aria-current="page" to="/">
                   Home
@@ -86,7 +86,7 @@ const logout=()=>{
               </>}
            
             </ul>
-            <ul className="d-flex gap-2 border-line mt-2 mb-2 mb-lg-2  col-4" role="search">
+            <ul className="d-flex gap-2 border-line mt-2 mb-2 mb-lg-2  col-3" role="search">
             {AuthName ?<> 
                
               <li className="border-line" type="submit">

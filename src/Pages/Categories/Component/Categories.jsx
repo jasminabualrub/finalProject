@@ -6,15 +6,15 @@ import axios from "axios";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
-
+import "swiper/css/autoplay";
 import "./Categories.css";
 import { NavLink, useParams } from "react-router-dom";
 // import required modules
-import { EffectCoverflow, Pagination } from "swiper/modules";
+import { EffectCoverflow, Pagination ,Autoplay} from "swiper/modules";
 import Loader from "../../../Components/Loader/Loader";
 
 function Categories() {
- 
+  
   const [error, setError] = useState("");
   const [loader, setLoader] = useState(true);
   const [categories, setCategory] = useState([]);
@@ -43,7 +43,8 @@ function Categories() {
     return <Loader />;
   }
   return (
-    <>
+    <div className='categories-container'>
+    <h3>Categories</h3>
       {error ? <p>{error}</p> : null}
       <Swiper
         effect={"coverflow"}
@@ -57,8 +58,9 @@ function Categories() {
           modifier: 1,
           slideShadows: true,
         }}
+        autoplay={{delay:1000}}
         pagination={true}
-        modules={[EffectCoverflow, Pagination]}
+        modules={[EffectCoverflow, Pagination,Autoplay]}
         className="mySwiper"
       >
         {categories.length > 0 ? (
@@ -79,7 +81,7 @@ function Categories() {
           <p> No Category Found</p>
         )}
       </Swiper>
-    </>
+    </div>
   );
 }
 
