@@ -1,0 +1,31 @@
+.cart-items-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+.cart-items-container h2 {
+  font-size: 4vw;
+  font-family: "Satisfy", cursive;
+  font-weight: 900;
+}
+.cart-items-container table {
+  border: 2px solid #ccc;
+  width: 70%;
+  box-shadow: 2px 2px 3px gray;
+  padding: 10px;
+}
+
+table,
+th,
+td {
+  text-align: center;
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 10px;
+}
+.tfoot {
+  text-align: center;
+  margin: auto;
+}
