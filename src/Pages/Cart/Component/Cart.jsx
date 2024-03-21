@@ -1,29 +1,56 @@
 
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify'
+import { Zoom } from "react-toastify";
 import { IoMdRemoveCircleOutline } from "react-icons/io";
 import Loader from './../../../Components/Loader/Loader';
 import axios from 'axios';
 import './Cart.css'
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
+import 'bootstrap'
 function Cart() {
   const token=localStorage.getItem('userToken');
+  
   const [cartItems,setCartItems] =useState([]);
   const[loader,setLoader]=useState(true);
   const[error,setError]=useState('');
-  const[reomveItem,setremoveItem]=useState([]);
-  const[removeall,setRemoveAll]=useState([]);
+  /*to decrease qauntity*/ 
+  const decreaseQuantity=async(id)=>{
+    try{const {data}=await axios.patch(`${import.meta.env.VITE_API_URL}/cart/decraseQuantity`,{productId:id},{headers:{Authorization:`Tariq__${token}`}});
+    console.log(data);
+  getCart();}
+    catch(err){
+      console.log(err);
+      setError('Error To Load Data :(')
+    }
+    finally{setLoader(false)}
+    
+
+  }
+  /*increaseQuantity */
+  const increaseQuantity=async(id)=>{
+    try{const {data}=await axios.patch(`${import.meta.env.VITE_API_URL}/cart/incraseQuantity`,{productId:id},{headers:{Authorization:`Tariq__${token}`}});
+    console.log(data);
+    getCart();}
+    catch(err){
+      console.log(err);
+      setError('Error To Load Data :(')
+    }
+    finally{setLoader(false)}
+    
+
+  }
   /*to remove all elements */
 const removeAllItmes=async()=>{
   try{
-    const {data}=await axios.patch(`${import.meta.env.VITE_API_URL}/cart/clear`,{headers:{Authorization:`Tariq__${token}`}})
-  console.log(data);
-   setRemoveAll(data.products);
- 
-setError("");}
+    const{data}=await axios.patch(`${import.meta.env.VITE_API_URL}/cart/clear`,{},{headers:{Authorization:`Tariq__${token}`}});
+    console.log(data);
+    getCart();}
   catch(err){
-    toast.error(error.response.data.message || 'Error to load your data :(')
+    console.log(err);
+      setError('Error to load your data :(') 
+    
   }
   finally{
     setLoader(false);
@@ -34,11 +61,12 @@ setError("");}
     try{
       const {data}=await axios.patch(`${import.meta.env.VITE_API_URL}/cart/removeItem`,{productId:id},{headers:{Authorization:`Tariq__${token}`}})
     console.log(data);
-     setremoveItem(data.products);
+   getCart();
    
   setError("");}
     catch(err){
-      toast.error(error.response.data.message || 'Error to load your data :(')
+      console.log(err);
+      setError('Error to load your data :(') 
     }
     finally{
       setLoader(false);
@@ -48,28 +76,26 @@ setError("");}
   const getCart=async()=>{
     try{
       const {data}=await axios.get(`${import.meta.env.VITE_API_URL}/cart`,{headers:{Authorization:`Tariq__${token}`}})
-    
-
-    
   setCartItems(data.products);
   setError("");}
     catch(err){
-      toast.error(error.response.data.message || 'Error to load your data :(')
+      toast.error(err.response.data.message || 'Error to load your data :(')
     }
     finally{
       setLoader(false);
     }
   }
-  useEffect(()=>{getCart();},[]);
+  useEffect(()=>{getCart()},[]);
   if(loader){
     return <Loader />
   }
   /*display data */
   return (<>
    {error?<p>{error}</p>:null}
-    <div className='cart-items-container' >
+    <div className='cart-items-container table-responsive' >
       <h2>CartItems</h2>
-      <table border={true}>
+      <table className="table table-hover table table-bordered ">
+      
       <thead>
         <tr>
           <th >ItemName</th>
@@ -79,25 +105,26 @@ setError("");}
         </tr>
       </thead>
       <tbody>
-   {cartItems.map(e=>{
+   {(cartItems.length >0) ?cartItems.map((e)=>(
         <tr key={e.productId}>
-          <td>{e.details.name}
-         <img src= {e.details.mainImage.secure_url}/>
-         <span>{e.details.colors}</span> 
+          <td className='d-flex flex-column align-items-center'> {e.details.name}
+          <img   className='img-fluid'src= {e.details.mainImage.secure_url}/>
+              <span>{e.details.colors}</span> 
           
-      <button onClick={removeCartItem()}><IoMdRemoveCircleOutline /></button>
+      <button onClick={()=>removeCartItem(e.productId)}><IoMdRemoveCircleOutline /></button>
 </td>
-          <td> <button><FaMinus /></button><span>{e.quantity}<button><FaPlus /></button></span></td>
+          <td> <button onClick={()=>{decreaseQuantity(e.productId)}}><FaMinus /></button><span>{e.quantity}</span><button onClick={()=>{increaseQuantity(e.productId)}}><FaPlus /></button></td>
           <td>{e.details.price}$</td>
-          <td>{e.details.price*e.quantity}</td>
+          <td>{e.details.price*e.quantity}$</td>
           </tr>
       
   
-   } )}
+   )):<tr><td colSpan="4">your cart is empty</td></tr>}
    </tbody>
    <tfoot>
-    <tr>
-      <td><button onClick={removeAllItmes} >ClearCart</button></td>
+    <tr >
+      <td colSpan="4"><button onClick={removeAllItmes} >ClearCart</button></td>
+      
     </tr>
    </tfoot>
    </table>

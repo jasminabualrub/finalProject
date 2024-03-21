@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import Loader from "./../../Components/Loader/Loader";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
@@ -13,7 +13,7 @@ function ProductDetail() {
     const [error, setError] = useState("");
     const [loader, setLoader] = useState(true);
     const[productdetail, setProductdetail] =useState([]);
-    
+    const navigate=useNavigate();
     const getProductDetailElement = async () => {
         try {
             const { data } = await axios.get(
@@ -54,7 +54,8 @@ function ProductDetail() {
               progress: undefined,
               theme: "colored",
               transition: Zoom,
-            });}}
+            });
+            navigate('/cart')}}
           catch(err){
             console.log(err);
             if (err.response.status === 409) {

@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import "bootstrap";
-
+import { TiShoppingCart } from "react-icons/ti";
 import { useContext } from "react";
 import { UserContext } from "../../Context/User";
 import { Navigate } from "react-router-dom";
@@ -70,8 +70,8 @@ const logout=()=>{
             
               {AuthName ?<> 
                <li className="nav-item">
-                <NavLink className="nav-link" to="/cart">
-                  Cart
+                <NavLink  className="nav-link size" to="/cart">
+                <TiShoppingCart />
                 </NavLink>
                 </li>
               

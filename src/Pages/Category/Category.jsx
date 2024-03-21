@@ -59,7 +59,7 @@ function Category() {
           <img src={e.mainImage.secure_url} />
           <h6>{e.name}</h6>
           <p>${e.price}</p>
-          <Link to={`/product/${e._id}`}>
+          <Link to={`/productdetail/${e._id}`}>
 				<button className="btn-style">View More</button>
 			</Link>
         </div>
