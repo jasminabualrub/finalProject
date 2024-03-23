@@ -39,7 +39,7 @@ function Products() {
   return (
     <div className="Products">
       <div className="ProductsTitle">
-        <h3>Products in FitMe Site... </h3>
+        <h3>OurProducts  </h3>
       </div>
       {error ? <p>{error}</p> : null}
       <div className="ProductsInfo">

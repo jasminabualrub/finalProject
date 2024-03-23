@@ -22,15 +22,15 @@ const logout=()=>{
     return (
     
     <>
-      <div className="Stickynavbar-Container">
-        <div className="Stickynavbar">
-          Welcome to Our FitMe Store get<span>20%OFF</span>{" "}
+      <div className="Stickynavbar-Container p-3">
+        <div className="Stickynavbar p-3">
+          Welcome to Our FitMe Store get<span>20%OFF</span>
         </div>
       </div>
 
-      <nav className="navbar navbar-expand-lg bg-body-tertiary" style={{height: '70px'}}>
+      <nav className="navbar navbar-expand-lg bg-body-tertiary p-3" style={{height: '70px'}}>
         <div className="container-fluid" style={{height: "100%", display: "flex", alignItems: "center,",backgroundColor:" rgba(255,255, 255, 1) "}}>
-          <NavLink className="navbar-brand font d-flex justify-content-center align-items-center  col-2" to="#">
+          <NavLink className="navbar-brand font d-flex justify-content-center align-items-center  col-4" to="#">
             <span>F</span>it<span>M</span>e
           </NavLink>
           <button
@@ -45,23 +45,14 @@ const logout=()=>{
           >
             <span className="navbar-toggler-icon " />
           </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mt-2 mb-2 mb-lg-2 col-7">
+          <div className="collapse navbar-collapse  p-3 gap-3" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mt-2 mb-2 mb-lg-2 col-4">
               <li className="nav-item">
                 <NavLink className="nav-link " aria-current="page" to="/">
                   Home
                 </NavLink>
               </li>
-             {/* <li className="nav-item">
-                <NavLink className="nav-link" to="/about">
-                  About
-                </NavLink>
-              </li>*/}
-            {/*  <li className="nav-item">
-                <NavLink className="nav-link" to="/profile">
-                  Profile
-                </NavLink>
-              </li>*/}
+          
               <li className="nav-item">
                 <NavLink className="nav-link" to="/products">
                   Products
@@ -75,18 +66,18 @@ const logout=()=>{
                 </NavLink>
                 </li>
               
-                <li className="spicial">
+                {/*<li className="spicial">
                 <NavLink  to="#">
                   welcome{AuthName}
                 </NavLink>
-              </li>
+              </li>*/}
               
                 </>:<>
                 
               </>}
            
             </ul>
-            <ul className="d-flex gap-2 border-line mt-2 mb-2 mb-lg-2  col-3" role="search">
+            <ul className="d-flex gap-2 border-line mt-2 mb-2 mb-lg-2  col-4" role="search">
             {AuthName ?<> 
                
               <li className="border-line" type="submit">

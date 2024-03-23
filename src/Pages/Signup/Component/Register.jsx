@@ -111,7 +111,7 @@ function Signup() {
     <>
       
       {errors.length > 0 ? errors.map((error) => <p>{error}</p>) : ""}
-      <div className="register-container">
+      <div className="register-container mt-5">
       <form onSubmit={handelSubmit}>
         <h1>Register</h1>
         <div className='username-container'>

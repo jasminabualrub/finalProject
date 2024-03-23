@@ -1,7 +1,6 @@
 
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify'
-import { Zoom } from "react-toastify";
 import { IoMdRemoveCircleOutline } from "react-icons/io";
 import Loader from './../../../Components/Loader/Loader';
 import axios from 'axios';
@@ -9,6 +8,7 @@ import './Cart.css'
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
 import 'bootstrap'
+import { NavLink } from 'react-router-dom';
 function Cart() {
   const token=localStorage.getItem('userToken');
   
@@ -107,13 +107,13 @@ const removeAllItmes=async()=>{
       <tbody>
    {(cartItems.length >0) ?cartItems.map((e)=>(
         <tr key={e.productId}>
-          <td className='d-flex flex-column align-items-center'> {e.details.name}
+          <td className='d-flex flex-column align-items-center justify-content-center'> {e.details.name}
           <img   className='img-fluid'src= {e.details.mainImage.secure_url}/>
               <span>{e.details.colors}</span> 
           
       <button onClick={()=>removeCartItem(e.productId)}><IoMdRemoveCircleOutline /></button>
 </td>
-          <td> <button onClick={()=>{decreaseQuantity(e.productId)}}><FaMinus /></button><span>{e.quantity}</span><button onClick={()=>{increaseQuantity(e.productId)}}><FaPlus /></button></td>
+          <td > <button onClick={()=>{decreaseQuantity(e.productId)}}><FaMinus /></button><span>{e.quantity}</span><button onClick={()=>{increaseQuantity(e.productId)}}><FaPlus /></button></td>
           <td>{e.details.price}$</td>
           <td>{e.details.price*e.quantity}$</td>
           </tr>
@@ -123,7 +123,9 @@ const removeAllItmes=async()=>{
    </tbody>
    <tfoot>
     <tr >
-      <td colSpan="4"><button onClick={removeAllItmes} >ClearCart</button></td>
+      <td colSpan="4"><button onClick={removeAllItmes} >ClearCart</button>
+      
+      <NavLink className='orderbutton' to={`/order`} >Check out</NavLink></td>
       
     </tr>
    </tfoot>

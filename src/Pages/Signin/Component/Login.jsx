@@ -105,7 +105,7 @@ return false;}
     <>
       
  {errors.length > 0?errors.map(error=><p>{error}</p>):''}
- <div className='formStyle'>
+ <div className='formStyle mt-5'>
   <h1>Login</h1>
  <form onSubmit={handelSubmit}>
       
@@ -124,23 +124,26 @@ return false;}
         name="password"
         value={user.password}
         onChange={handelChange}
-      /></div>
+      />
+       <div className="remember-forgot">
       
-      <div className="remember-forgot">
-      <label><input type='checkbox'/>Remmember me</label>
-      <Link to={`/sendcode`}><span>Forgot Passward ?</span></Link>
+      <Link to={`/sendcode`}><span style={{color:'white'}}>Forgot Passward ?</span></Link>
       
       </div>
       
     
       <button type="submit"  className= "btn btn-outline-success" disabled={loader?'disabled':null}>{!loader?'login':'Wait...'}</button>
-      <div className="register-link">
-      Dont have an acount?
+      <div className="register-link" >
+        <span className='me-3'> Dont have an acount?</span>
+     
       <Link to={`/signup`}>
-      <span>Register</span>
+      <span style={{color:'white', fontWeight:'700' ,}}>Register</span>
       </Link>
       
       </div>
+      </div>
+      
+     
     </form>
  </div>
       

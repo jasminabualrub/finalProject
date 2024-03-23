@@ -25,9 +25,33 @@ td {
   border-collapse: collapse;
   padding: 10px;
 }
+table img{
+  width:20%;
+}
+table span {
 
+}
+table button {
+  border: 1px solid #d6ccc2;
+  border-radius: 2px;
+  padding: 5px;
+  background-color: transparent;
+  cursor: pointer;
+  margin-top: 10px;
+  background-color: #d6ccc2;
+}
 
 .tfoot {
   text-align: center;
   margin: auto;
+}
+.orderbutton{
+  border: 1px solid #d6ccc2;
+  border-radius: 2px;
+  margin-left: 10px;
+  padding: 6px;
+  background-color: transparent;
+  cursor: pointer;
+  margin-top: 10px;
+  background-color: #d6ccc2;
 }
