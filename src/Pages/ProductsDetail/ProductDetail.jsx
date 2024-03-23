@@ -1,5 +1,6 @@
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import "swiper/css";
+import { object, string} from 'yup';
 import { FaCartPlus } from "react-icons/fa6";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -17,6 +18,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 function ProductDetail() {
   const { AuthName } = useContext(UserContext);
   const { _id } = useParams();
+  const [user, setUser] = useState({
+  
+    comment: "",
+    rating: "",
+   
+  });
   const [error, setError] = useState("");
   const [loader, setLoader] = useState(true);
   const [productdetail, setProductdetail] = useState([]);
@@ -39,6 +46,7 @@ function ProductDetail() {
   };
   useEffect(() => {
     getProductDetailElement();
+    
   }, []);
   if (loader) {
     return <Loader />;
@@ -85,8 +93,83 @@ function ProductDetail() {
       }
     }
   };
+  /*review section t create  */
+
+  const handelChange = (e) => {
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
+  };
+ 
+  const validateData=async()=>{
+    const commentSchema=object({
+            
+             comment:string().max(200),
+             rating:string().min(1,'at least one').max(5).required('rating is required field'),
+    });
+    try{
+      await commentSchema.validate(user,{abortEarly:false});
+      return true;}
+      catch(err){
+        console.log("validation error",err.errors);
+       setError(err.errors);
+      return false;}
+                    
+        }
+       
+  const handelSubmit = async (e) => {
+    e.preventDefault();
+    setLoader(true);
+    const validate=await validateData();
+    console.log(validate);
+ 
+    try{
+      const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/products/${_id}/review`,user,{headers:{Authorization:`Tariq__${token}`}}
+    );
+    setUser({
+      comment: "",
+     rating: "",
+      
+    });
+    
+    if (data.message == "success") {
+      
+      toast.success("you are success to comment", {
+        position: "bottom-center",
+        autoClose: 6000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Zoom,
+      });
+     
+    }
+    console.log(data);
+  }  catch (err) {
+    if (err.response.status === 400) {
+      toast.error("this product is not exist in your cart so you can not review it !", {
+        position: "bottom-center",
+        autoClose: 6000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Zoom,
+      });
+    }
+    console.log(err);
+  }
+  finally{
+    setLoader(false);
+  }
+  }
 
   return (
+    <>
     <div className="detail-container d-flex flex-md-wrap flex-lg-nowrap ">
       {error ? <p>{error}</p> : null}
       <div className="product-details-images col-6 m-3">
@@ -144,45 +227,100 @@ function ProductDetail() {
         ) : (
           <></>
         )}
+   </div>
+   </div>
+ 
+<button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+ create your review
+</button>
 
-        <div className="comment">
-          <h6>Comments</h6>
-          {productdetail.reviews.map((e) => (
-            <div className="comment-box " key={e.id}>
-                 <span
-                className="text-wrap"
-                style={{ color: "black", fontWeight: "200" }}
-              >
-               is {e.comment}
-              </span>
-              <br />
-              <span
-                className="text-wrap"
-                style={{ color: "black", fontWeight: "200", fontSize: "8px" }}
-              >
-                comment by {e.createdBy.userName}{" "}<br/>
-              </span>
-           
-              <span
-                className="text-wrap"
-                style={{ color: "black", fontWeight: "200", fontSize: "8px" }}
-              >
-                {" "}
-                created at {e.createdAt}
-              </span>
-              <br />
-              <span
-                className="text-wrap"
-                style={{ color: "black", fontWeight: "300", fontSize: "10px" }}
-              >
-                {" "}
-                Rating {e.rating} /5
-              </span>
-            </div>
-          ))}
-        </div>
+<div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div className="modal-dialog">
+    <div className="modal-content">
+      <div className="modal-header">
+        <h5 className="modal-title" id="exampleModalLabel">Add your comment</h5>
+        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      <form onSubmit={handelSubmit}>
+      <div className="modal-body">
+     
+
+<div className="email-container">
+<label>comment:</label>
+    <input className="form-control"
+      type="comment"
+      name="comment"
+      value={user.comment}
+      onChange={handelChange}
+    />
+</div>
+    <div className="passward-container"><label>Rating:</label>
+    <input className="form-control"
+      type="rating"
+      name="rating"
+      value={user.rating}
+      onChange={handelChange}
+    />
+   
+    
+
     </div>
+
+
+
+      </div>
+      <div className="modal-footer">
+        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" className="btn btn-primary">  Add review</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<hr/>
+        
+    
+   
+     
+    <div className="comment">
+    <h6>Comments ({productdetail.reviews.length})</h6>
+    {productdetail.reviews.map((e) => (
+      <div className="comment-box p-3 mb-3" key={e.id}>
+        <span
+          className="text-wrap"
+          style={{ color: "black", fontWeight: "200" }}
+        >
+          is {e.comment}
+        </span>
+        <br />
+        <span
+          className="text-wrap"
+          style={{ color: "black", fontWeight: "200", fontSize: "8px" }}
+        >
+          comment by {e.createdBy.userName} <br />
+        </span>
+
+        <span
+          className="text-wrap"
+          style={{ color: "black", fontWeight: "200", fontSize: "8px" }}
+        >
+          {" "}
+          created at {e.createdAt}
+        </span>
+        <br />
+        <span
+          className="text-wrap"
+          style={{ color: "black", fontWeight: "300", fontSize: "10px" }}
+        >
+          {" "}
+          Rating {e.rating}
+        </span>
+      </div>
+    ))}
+  </div>
+  </>
+    
   );
 }
 export default ProductDetail;

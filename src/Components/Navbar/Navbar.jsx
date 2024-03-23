@@ -2,9 +2,12 @@ import { NavLink, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import "bootstrap";
 import { TiShoppingCart } from "react-icons/ti";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../Context/User";
 import { Navigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
+import Loader from "../Loader/Loader";
 function Navbar() {
 /* const spaceBottomclass=()=>{
   document.querySelector('.navbar-toggler').classList.toggle.className='spacebottom';
@@ -18,7 +21,31 @@ const logout=()=>{
   setAuthName(null);
   Navigate('/signin');
 }
+const token = localStorage.getItem("userToken");
+const [counter, setCounter] = useState();
 
+  const [loader, setLoader] = useState(true);
+  const [error, setError] = useState("");
+const getCart = async () => {
+  try {
+    const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/cart`, {
+      headers: { Authorization: `Tariq__${token}` },
+    });
+   
+    setCounter(data.count);
+    setError("");
+  } catch (err) {
+    toast.error(err.response.data.message || "Error to load your data :(");
+  } finally {
+    setLoader(false);
+  }
+};
+useEffect(() => {
+  getCart();
+}, []);
+if (loader) {
+  return <Loader />;
+}
     return (
     
     <>
@@ -28,7 +55,7 @@ const logout=()=>{
         </div>
       </div>
 
-      <nav className="navbar navbar-expand-lg bg-body-tertiary p-3" style={{height: '70px'}}>
+      <nav className="navbar navbar-expand-lg bg-body-tertiary p-3" style={{height: '70px',position:'relative'}}>
         <div className="container-fluid" style={{height: "100%", display: "flex", alignItems: "center,",backgroundColor:" rgba(255,255, 255, 1) "}}>
           <NavLink className="navbar-brand font d-flex justify-content-center align-items-center  col-4" to="#">
             <span>F</span>it<span>M</span>e
@@ -61,8 +88,11 @@ const logout=()=>{
             
               {AuthName ?<> 
                <li className="nav-item">
-                <NavLink  className="nav-link size" to="/cart">
+                <NavLink style={{position:'relative'}} className="nav-link size" to="/cart">
                 <TiShoppingCart />
+                <span className="d-flex align-items-center justify-content-center " style={{ color: "black", position:'absolute', top: "0px",right:'16px',zIndex:'9',width:'22px',height:'22px',borderRadius:'50%',backgroundColor:' #d5bdaf', }}>
+        {counter}
+      </span>
                 </NavLink>
                 </li>
               

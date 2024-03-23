@@ -1,9 +1,9 @@
 
-import {  useState } from "react";
+import {  useEffect, useState } from "react";
 import { number, object, string} from 'yup';
 import axios from "axios";
 import { Zoom, toast } from "react-toastify";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import 'bootstrap' 
 /*import { Link, useNavigate } from "react-router-dom";*/
 
@@ -14,8 +14,10 @@ function Order() {
   const token=localStorage.getItem('userToken');
  /* const {setUserToken}=useContext(UserContext);
   const navigate=useNavigate();*/
+  const [cartItems, setCartItems] = useState([]);
   const [errors,setError]=useState([]);
   const[loader,setLoader]=useState(false);
+  const navigate=useNavigate();
   const [order, setOrder] = useState({
   
     couponName: "",
@@ -78,7 +80,8 @@ return false;}
       });
      /* localStorage.setItem("userToken", data.token);
       setUserToken(data.token);
-      navigate('/')*/
+      */
+      navigate(`/profile`)
     }
     console.log(data);
   } catch (err) {
@@ -104,12 +107,54 @@ return false;}
     
     
     /* const {data}=await axios.post(`${import.meta.env.VITE_API_URL}/auth/signup`,{user});*/ //هاي عشان ابعث الداتا عن طريق البودي بحط البراميتر هو اليوزر
- 
+    const getCart = async () => {
+      try {
+        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/cart`, {
+          headers: { Authorization: `Tariq__${token}` },
+        });
+        setCartItems(data.products);
+       
+        setError("");
+      } catch (err) {
+        toast.error(err.response.data.message || "Error to load your data :(");
+      } finally {
+        setLoader(false);
+      }
+    };
+    useEffect(() => {
+      getCart();
+    }, []);
+    if (loader) {
+      return <loader/>;
+    }
 
   return (
     <>
       
  {errors.length > 0?errors.map(error=><p>{error}</p>):''}
+ <h3 style={{fontFamily:"Satisfy, cursive",fontWeight:"700"}} className="d-flex  flex-column align-items-center mt-5 mb-5">Elements to order</h3>
+ <div className="d-flex align-items-center justify-content-center flex-md-wrap flex-lg-nowrap">
+ 
+ {cartItems.length > 0 ? (
+              cartItems.map((e) => (
+                <div className="d-flex  flex-column align-items-center " key={e.productId}>
+                
+         
+                  <h6> {e.details.name}</h6> 
+                    <img
+                      className="img-fluid  d-flex" style={{width:'40%', height:'40%',borderRadius:'50%',objectFit:'cover'}}
+                      src={e.details.mainImage.secure_url}
+                    />
+                     <p>{e.quantity} item in your cart</p>
+                    
+                    </div>
+              )
+            ) ): <></>
+            
+            }
+ </div>
+           
+         
  <div className='formStyle'>
   <h1> Create Order</h1>
  <form onSubmit={handelSubmit}>
@@ -138,10 +183,10 @@ return false;}
         value={order.phone}
         onChange={handelChange}
       /></div>
-      <NavLink to={`/profile`}>
+
       <button type="submit"  className= "btn btn-outline-success" disabled={loader?'disabled':null}>{!loader?'Order To Install':'Wait...'}</button>
       
-      </NavLink>
+     
      
     
       
