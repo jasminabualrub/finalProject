@@ -34,8 +34,8 @@ function Order() {
     const orderSchema=object({
             
       couponName:string().email('Plz check your Coupon Name'),
-      address:string().required('address is required field'),
-      phone:number().required('phone is required field'),
+      address:string().required(toast.error('address is required field')),
+      phone:number().max(10).required(toast.error('phone is required field')),
     });
 
 try{
@@ -142,7 +142,7 @@ return false;}
          
                   <h6> {e.details.name}</h6> 
                     <img
-                      className="img-fluid  d-flex" style={{width:'40%', height:'40%',borderRadius:'50%',objectFit:'cover'}}
+                      className="img-fluid  d-flex" style={{width:'150px', height:'150px',borderRadius:'50%',objectFit:'cover',border:'1px solid #ccc',boxShadow:'2px 2px 2px #ccc'}}
                       src={e.details.mainImage.secure_url}
                     />
                      <p>{e.quantity} item in your cart</p>

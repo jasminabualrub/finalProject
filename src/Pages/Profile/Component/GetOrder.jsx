@@ -37,14 +37,18 @@ console.log(data.orders)
   /*display data */
   return (<div  className='orderlist'>
   {error? <p>{error}</p> : null}
-  <h2 className='text-center m-5'>List of orders</h2>
+  <h3 style={{
+          fontFamily: "Satisfy, cursive",
+          fontWeight: " 900",
+          fontSize: "4vw",
+        }}  className="d-flex  flex-column align-items-center mt-5 mb-5 text-center" >List of orders</h3>
   {orderItems.length >0 ?(orderItems.map((e)=>(
     <div className='OrderItem d-flex flex-column flex-wrap  ' key={e._id}>
       {e.products.map((el)=>(
         <div className="product d-flex gap-5 flex-sm-wrap flex-md-wrap flex-lg-nowrap" key={el._id}>
-          <div className='order-img img-fluid  col-4'><img src={el.productId.mainImage.secure_url}/></div>
+          <div className='order-img img-fluid col-md-12 col-lg-4'><img className='img-fluid ' style={{width:'200px',height:'200px',objectFit:'cover'}}src={el.productId.mainImage.secure_url}/></div>
          
-          <div className='img-Detail text-center d-flex flex-column justify-content-center gap-3 col-5'>
+          <div className='img-Detail text-center d-flex flex-column justify-content-center gap-3 col-md-12  col-lg-4'>
           <h5 style={{color:'gray'}}>{el.productId.name}</h5>
           <p>${el. finalPrice}</p>
           <h6>{el.quantity} item</h6>
@@ -52,7 +56,7 @@ console.log(data.orders)
          
      
       
-      <div className='OrderStatus  text-center mt-5 col-3 '>
+      <div className='OrderStatus  text-center mt-5 col-md-12  col-lg-4 '>
         <h5  style={{color:'gray'}}>status </h5>
         <h6>{e.status}...</h6>
       </div>

@@ -40,15 +40,17 @@ function Products() {
     <div className="Products">
       <div className="ProductsTitle">
         <h3>OurProducts  </h3>
+      
       </div>
+      <hr/>
       {error ? <p>{error}</p> : null}
       <div className="ProductsInfo">
         {products.length > 0 ? (
           products.map((e) => (
-            <div className="product" key={e._id}>
+            <div className="product " key={e._id}>
               <img src={e.mainImage.secure_url} alt={e.name} />
-              <h6>{e.name}</h6>
-              <p>${e.price}</p>
+              <h6 className="p-3 " style={{fontWeight:'700'}}>{e.name}</h6>
+              <p style={{fontWeight:'500'}}>${e.price}</p>
               <Link to={`/productdetail/${e._id}`}>
                 <button className="btn-style">View More</button>
               </Link>

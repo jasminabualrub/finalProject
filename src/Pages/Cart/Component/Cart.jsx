@@ -131,10 +131,15 @@ function Cart() {
     { /* <span className="d-flex align-items-center justify-content-center " style={{ color: "black", position:'absolute', top: "50px",right:'535px',zIndex:'9',width:'22px',height:'22px',borderRadius:'50%',backgroundColor:' #d5bdaf', }}>
         {counter}
       </span>*/}
+       <h3 style={{
+          fontFamily: "Satisfy, cursive",
+          fontWeight: " 900",
+          fontSize: "4vw",
+        }}  className="d-flex  flex-column align-items-center mt-5 mb-5">CartItems</h3>
       {error ? <p>{error}</p> : null}
       <div className="cart-items-container table-responsive">
-        <h2>CartItems</h2>
-        <table className="table table-hover table table-bordered ">
+       
+         <table className="table table-hover table table-bordered ">
           <thead>
             <tr>
               <th>ItemName</th>
@@ -199,6 +204,7 @@ function Cart() {
             </tr>
           </tfoot>
         </table>
+      
       </div>
     </div>
   );

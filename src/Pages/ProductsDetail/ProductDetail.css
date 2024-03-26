@@ -83,3 +83,7 @@
 .comment h6 {
   text-align: left;
 }
+.hov:hover {
+  background-color: #d5bdaf;
+  color: white;
+}
