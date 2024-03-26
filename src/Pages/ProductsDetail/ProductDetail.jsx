@@ -170,15 +170,17 @@ function ProductDetail() {
 
   return (
     <>
-    <div className="detail-container d-flex flex-md-wrap flex-lg-nowrap ">
+    <h3 style={{fontFamily:"Satisfy, cursive",fontWeight:"700"}} className="d-flex  flex-column align-items-center mt-5 mb-5">Product Details</h3>
+    <div className=" d-lg-flex flex-md-wrap flex-lg-nowrap ">
       {error ? <p>{error}</p> : null}
-      <div className="product-details-images col-6 m-3">
+      
+      <div className="product-details-images col-md-12 col-lg-6  m-3  ">
         <img
           className="img-fluid mb-3 img-swiper "
           src={productdetail.mainImage.secure_url}
           alt={productdetail.name}
         />
-        <p>{productdetail.description}</p>
+       {/* <p>{productdetail.description}</p>*/} 
         <div className="product-details-subimages d-flex">
           <Swiper
             effect={"coverflow"}
@@ -212,10 +214,10 @@ function ProductDetail() {
       </div>
 
       <div
-        className="productdetail col-6 d-flex justify-content-start align-self-stretch"
+        className=" col-lg-6 col-md-12 d-flex justify-content-start flex-column"
         key={productdetail._id}
       >
-        <h4>{productdetail.name}</h4>
+        <h4 >{productdetail.name}</h4>
         <span>{productdetail.price}$</span>
 
         {AuthName ? (
@@ -227,13 +229,9 @@ function ProductDetail() {
         ) : (
           <></>
         )}
-   </div>
-   </div>
- 
-<button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+           <button style={{width:'auto'}} type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
  create your review
 </button>
-
 <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div className="modal-dialog">
     <div className="modal-content">
@@ -277,6 +275,13 @@ function ProductDetail() {
     </div>
   </div>
 </div>
+   </div>
+
+   </div>
+ 
+
+
+
 
 <hr/>
         
@@ -286,36 +291,39 @@ function ProductDetail() {
     <div className="comment">
     <h6>Comments ({productdetail.reviews.length})</h6>
     {productdetail.reviews.map((e) => (
-      <div className="comment-box p-3 mb-3" key={e.id}>
+      <div className="comment-box p-3 mb-3 d-flex justify-content-between" key={e.id}>
+        <div className="comment-detail"> <div className="img-commentt-box d-flex gap-3" >
+        <img  className='img-fluid ' style={{width:'10%',height:'10%',borderRadius:'50%',display:'flex'}}src={e.createdBy.image.secure_url
+}/>
         <span
-          className="text-wrap"
+          className="text-wrap d-flex align-items-center"
           style={{ color: "black", fontWeight: "200" }}
         >
           is {e.comment}
         </span>
+        </div>
+        
         <br />
         <span
-          className="text-wrap"
+          
           style={{ color: "black", fontWeight: "200", fontSize: "8px" }}
         >
           comment by {e.createdBy.userName} <br />
         </span>
 
         <span
-          className="text-wrap"
+          
           style={{ color: "black", fontWeight: "200", fontSize: "8px" }}
         >
-          {" "}
+         
           created at {e.createdAt}
         </span>
-        <br />
-        <span
-          className="text-wrap"
-          style={{ color: "black", fontWeight: "300", fontSize: "10px" }}
+        <br /></div>
+       <div className="comment-rating"> <span style={{ color: "black", fontWeight: "300", fontSize: "10px" }}
         >
-          {" "}
-          Rating {e.rating}
-        </span>
+          Rating :<span style={{ color: " #d5bdaf", fontWeight: "900", fontSize: "12px" }}>{e.rating}</span>
+        </span></div>
+       
       </div>
     ))}
   </div>

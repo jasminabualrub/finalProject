@@ -85,6 +85,11 @@ if (loader) {
                   Products
                 </NavLink>
               </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/categories">
+                  Categories
+                </NavLink>
+              </li>
             
               {AuthName ?<> 
                <li className="nav-item">
