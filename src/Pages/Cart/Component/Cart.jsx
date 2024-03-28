@@ -7,7 +7,7 @@ import "./Cart.css";
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
 import "bootstrap";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 function Cart() {
   const token = localStorage.getItem("userToken");
   const [counter, setCounter] = useState(0);

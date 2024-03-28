@@ -1,4 +1,4 @@
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import "swiper/css";
 import { object, string } from "yup";
 import { FaCartPlus } from "react-icons/fa6";

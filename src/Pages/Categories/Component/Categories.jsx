@@ -8,7 +8,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
 import "./Categories.css";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 // import required modules
 import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
 import Loader from "../../../Components/Loader/Loader";

@@ -16,7 +16,7 @@ import Loader from "./Components/Loader/Loader";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Products from "./Pages/Products/Products";
-import Category from './Pages/Category/Category';
+import Category from "./Pages/Category/Category";
 import ProductsRoutes from "./auth/ProductsRoute/ProductsRoutes";
 import UnProtectedRoutes from "./auth/UnProtectedRoutes";
 import ProductDetail from "./Pages/ProductsDetail/ProductDetail";
@@ -48,25 +48,23 @@ const router = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <UserContextProvider>
-       <About /></UserContextProvider>,
-        
+        element: (
+          <UserContextProvider>
+            <About />
+          </UserContextProvider>
+        ),
       },
       {
-       
         path: "/signin",
-        element: 
-        
-          <Signin />
-         
-        ,
+        element: <Signin />,
       },
       {
         path: "/signup",
-        element: <UnProtectedRoutes>
-          <Signup />
+        element: (
+          <UnProtectedRoutes>
+            <Signup />
           </UnProtectedRoutes>
-        ,
+        ),
       },
       {
         path: "/forgetpassward",
@@ -75,41 +73,41 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
-        children:[
+        children: [
           {
             path: "/profile/info",
-            element: <Info/>
+            element: <Info />,
           },
           {
             path: "/profile/contact",
-            element: <Contact/>,
+            element: <Contact />,
           },
           {
             path: "/profile/getOrder",
-            element: <GetOrder/>
+            element: <GetOrder />,
           },
-        ]
+        ],
       },
       {
         path: "/category/:_id",
-        element: <Category/>,
+        element: <Category />,
       },
       {
         path: "/productdetail/:_id",
-        element: <ProductDetail/>,
+        element: <ProductDetail />,
       },
-    
+
       {
         path: "/products",
-        element: <ProductsRoutes>
-               <Products/>
-            </ProductsRoutes>
+        element: (
+          <ProductsRoutes>
+            <Products />
+          </ProductsRoutes>
+        ),
       },
       {
         path: "/logout",
-        element: 
-               <Logout/>
-           
+        element: <Logout />,
       },
       {
         path: "/product/:_id",
@@ -139,8 +137,11 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-    <UserContextProvider> <RouterProvider router={router} /></UserContextProvider>
-     
+      <UserContextProvider>
+        {" "}
+        <RouterProvider router={router} />
+      </UserContextProvider>
+
       <ToastContainer />
     </>
   );
