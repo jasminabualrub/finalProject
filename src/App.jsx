@@ -24,9 +24,9 @@ import UserContextProvider from "./Context/User";
 import Logout from "./Pages/Logout/Logout";
 import SendCode from "./Pages/SendCode/SendCode";
 
-import Info from "./Pages/Profile/Component/Info";
-import Contact from './Pages/Profile/Component/Contact';
 import GetOrder from "./Pages/Profile/Component/GetOrder";
+import Info from './Pages/Profile/Component/Info';
+import Contact from './Pages/Profile/Component/Contact';
 
 
 
@@ -75,15 +75,15 @@ const router = createBrowserRouter([
         element: <Profile />,
         children: [
           {
-            path: "/profile/info",
+            path: "info", // /profile/info
             element: <Info />,
           },
           {
-            path: "/profile/contact",
+            path: "contact",
             element: <Contact />,
           },
           {
-            path: "/profile/getOrder",
+            path: "getOrder", // /profile/profile/getOrder
             element: <GetOrder />,
           },
         ],
