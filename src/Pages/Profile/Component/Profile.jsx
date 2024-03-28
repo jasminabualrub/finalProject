@@ -1,7 +1,5 @@
-
 import { NavLink, Outlet } from "react-router-dom";
 import Home from "../../Home/Component/Home";
-
 
 function Profile() {
   return (

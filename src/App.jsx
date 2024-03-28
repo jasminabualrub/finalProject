@@ -17,7 +17,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Products from "./Pages/Products/Products";
 import Category from "./Pages/Category/Category";
-import ProductsRoutes from "./auth/ProductsRoute/ProductsRoutes";
+import ProtectedRoutes from "./auth/ProductsRoute/ProtectedRoutes";
 import UnProtectedRoutes from "./auth/UnProtectedRoutes";
 import ProductDetail from "./Pages/ProductsDetail/ProductDetail";
 import UserContextProvider from "./Context/User";
@@ -25,12 +25,8 @@ import Logout from "./Pages/Logout/Logout";
 import SendCode from "./Pages/SendCode/SendCode";
 
 import GetOrder from "./Pages/Profile/Component/GetOrder";
-import Info from './Pages/Profile/Component/Info';
-import Contact from './Pages/Profile/Component/Contact';
-
-
-
-
+import Info from "./Pages/Profile/Component/Info";
+import Contact from "./Pages/Profile/Component/Contact";
 
 const router = createBrowserRouter([
   {
@@ -72,10 +68,14 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <Profile />,
+        element: (
+          <ProtectedRoutes>
+            <Profile />
+          </ProtectedRoutes>
+        ),
         children: [
           {
-            path: "info", // /profile/info
+            path: "info",
             element: <Info />,
           },
           {
@@ -83,7 +83,7 @@ const router = createBrowserRouter([
             element: <Contact />,
           },
           {
-            path: "getOrder", // /profile/profile/getOrder
+            path: "getOrder",
             element: <GetOrder />,
           },
         ],
@@ -100,9 +100,9 @@ const router = createBrowserRouter([
       {
         path: "/products",
         element: (
-          <ProductsRoutes>
+          <ProtectedRoutes>
             <Products />
-          </ProductsRoutes>
+          </ProtectedRoutes>
         ),
       },
       {

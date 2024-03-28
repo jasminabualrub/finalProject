@@ -64,15 +64,13 @@ function Categories() {
       >
         {categories.length > 0 ? (
           categories.map((e) => (
-            <div className="category" key={e._id}>
-              <SwiperSlide>
+            <SwiperSlide key={e._id}>
+              <div className="category" >
                 <NavLink to={`/category/${e._id}`}>
                   <img src={e.image.secure_url} alt={e.name} />
                 </NavLink>
-              </SwiperSlide>
-
-              {/*<h1>{e.name}</h1>*/}
-            </div>
+              </div>
+            </SwiperSlide>
           ))
         ) : (
           <p> No Category Found</p>

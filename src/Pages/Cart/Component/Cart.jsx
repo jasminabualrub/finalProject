@@ -103,7 +103,9 @@ function Cart() {
     }
   };
   useEffect(() => {
-    getCart();
+    if (token) {
+      getCart();
+    }
   }, []);
   if (loader) {
     return <Loader />;
