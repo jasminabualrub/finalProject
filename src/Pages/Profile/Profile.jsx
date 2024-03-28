@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from "react-router-dom";
-import Home from "../../Home/Component/Home";
+import Home from "../Home/Component/Home";
 
 function Profile() {
   return (
@@ -7,11 +7,7 @@ function Profile() {
       <div className="container-fluid">
         <ul className="nav nav-tabs justify-content-end style-nav">
           <li className="nav-item">
-            <NavLink
-              className="nav-link "
-              aria-current="page"
-              to="/profile/info"
-            >
+            <NavLink className="nav-link " aria-current="page" to="/profile">
               Information
             </NavLink>
           </li>

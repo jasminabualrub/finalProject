@@ -7,7 +7,7 @@ import About from "./Pages/About/Components/About";
 import Signin from "./Pages/Signin/Component/Login";
 import Signup from "./Pages/Signup/Component/Register";
 import Forgetpassward from "./Pages/Forgetpassward/Component/Forgetpassward";
-import Profile from "./Pages/Profile/Component/Profile";
+import Profile from "./Pages/Profile/Profile";
 import Product from "./Pages/Product/Component/Product";
 import Cart from "./Pages/Cart/Component/Cart";
 import Order from "./Pages/Order/Component/Order";
@@ -24,9 +24,9 @@ import UserContextProvider from "./Context/User";
 import Logout from "./Pages/Logout/Logout";
 import SendCode from "./Pages/SendCode/SendCode";
 
-import GetOrder from "./Pages/Profile/Component/GetOrder";
-import Info from "./Pages/Profile/Component/Info";
-import Contact from "./Pages/Profile/Component/Contact";
+import GetOrder from "./Pages/Profile/GetOrder";
+import Info from "./Pages/Profile/Info";
+import Contact from "./Pages/Profile/Contact";
 
 const router = createBrowserRouter([
   {
@@ -35,15 +35,15 @@ const router = createBrowserRouter([
 
     children: [
       {
-        path: "/",
+        index: true,
         element: <Home />,
       },
       {
-        path: "/sendcode",
+        path: "sendcode",
         element: <SendCode />,
       },
       {
-        path: "/about",
+        path: "about",
         element: (
           <UserContextProvider>
             <About />
@@ -51,11 +51,11 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/signin",
+        path: "signin",
         element: <Signin />,
       },
       {
-        path: "/signup",
+        path: "signup",
         element: (
           <UnProtectedRoutes>
             <Signup />
@@ -63,11 +63,11 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/forgetpassward",
+        path: "forgetpassward",
         element: <Forgetpassward />,
       },
       {
-        path: "/profile",
+        path: "profile",
         element: (
           <ProtectedRoutes>
             <Profile />
@@ -75,7 +75,7 @@ const router = createBrowserRouter([
         ),
         children: [
           {
-            path: "info",
+            index: true,
             element: <Info />,
           },
           {
@@ -89,16 +89,16 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "/category/:_id",
+        path: "category/:_id",
         element: <Category />,
       },
       {
-        path: "/productdetail/:_id",
+        path: "productdetail/:_id",
         element: <ProductDetail />,
       },
 
       {
-        path: "/products",
+        path: "products",
         element: (
           <ProtectedRoutes>
             <Products />
@@ -106,28 +106,28 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/logout",
+        path: "logout",
         element: <Logout />,
       },
       {
-        path: "/product/:_id",
+        path: "product/:_id",
         element: <Product />,
       },
 
       {
-        path: "/cart",
+        path: "cart",
         element: <Cart />,
       },
       {
-        path: "/order",
+        path: "order",
         element: <Order />,
       },
       {
-        path: "/categories",
+        path: "categories",
         element: <Categories />,
       },
       {
-        path: "/loader",
+        path: "loader",
         element: <Loader />,
       },
       { path: "*", element: <Notfound /> },

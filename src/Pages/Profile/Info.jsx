@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import "./Profile.css";
-import Loader from "./../../../Components/Loader/Loader";
+import Loader from "../../Components/Loader/Loader";
 import axios from "axios";
+import './Profile.css'
 
 function Info() {
   const token = localStorage.getItem("userToken");
-  const [userInfo, setUserInfo] = useState([]);
+  const [userInfo, setUserInfo] = useState({});
   const [loader, setLoader] = useState(true);
   const [error, setError] = useState("");
+
   const getInfo = async () => {
     try {
       const { data } = await axios.get(
@@ -26,17 +27,20 @@ function Info() {
       setLoader(false);
     }
   };
+
   useEffect(() => {
     getInfo();
   }, []);
+
   if (loader) {
     return <Loader />;
   }
+
   return (
     <>
       {error ? <p>{error}</p> : null}
 
-      <div className="d-flex align-items-center  gap-3 m-3" key={userInfo.id}>
+      <div className="d-flex align-items-center  gap-3 m-3">
         <div className="user-img">
           <img src={userInfo.image.secure_url} alt={userInfo.userName} />
         </div>

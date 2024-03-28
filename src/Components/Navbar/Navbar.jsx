@@ -24,9 +24,10 @@ function Navbar() {
   const token = localStorage.getItem("userToken");
   const [counter, setCounter] = useState();
 
-  const [loader, setLoader] = useState(true);
+  const [loader, setLoader] = useState(false);
   const [error, setError] = useState("");
   const getCart = async () => {
+    setLoader(true);
     try {
       const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/cart`, {
         headers: { Authorization: `Tariq__${token}` },
@@ -107,6 +108,13 @@ function Navbar() {
                   Categories
                 </NavLink>
               </li>
+              {token && (
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/profile">
+                    profile
+                  </NavLink>
+                </li>
+              )}
 
               {AuthName ? (
                 <>

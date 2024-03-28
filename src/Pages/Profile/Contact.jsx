@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-import Loader from "./../../../Components/Loader/Loader";
+import Loader from "../../Components/Loader/Loader";
 import axios from "axios";
 import "bootstrap";
 
