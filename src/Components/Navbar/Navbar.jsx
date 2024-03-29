@@ -8,6 +8,7 @@ import { Navigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Loader from "../Loader/Loader";
+import Info from "../../Pages/Profile/Info";
 function Navbar() {
   /* const spaceBottomclass=()=>{
   document.querySelector('.navbar-toggler').classList.toggle.className='spacebottom';
@@ -176,12 +177,13 @@ function Navbar() {
                   </li>
                 </>
               )}
-              <li className="border-line" type="submit">
+              {token?<>Hello,{AuthName}</>:<li className="border-line" type="submit">
                 <NavLink className="active-press" to="/signup">
                   {" "}
                   Register
                 </NavLink>
-              </li>
+              </li>}
+              
             </ul>
           </div>
         </div>

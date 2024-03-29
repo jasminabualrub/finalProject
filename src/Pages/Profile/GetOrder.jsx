@@ -6,10 +6,12 @@ import axios from "axios";
 import "./Profile.css";
 
 import "bootstrap";
+import { useParams } from "react-router-dom";
 
 function GetOrder() {
   const token = localStorage.getItem("userToken");
-
+const{_id}=useParams();
+console.log(_id);
   const [orderItems, setOrderItems] = useState([]);
   const [loader, setLoader] = useState(true);
   const [error, setError] = useState("");
@@ -22,6 +24,7 @@ function GetOrder() {
         { headers: { Authorization: `Tariq__${token}` } }
       );
       setOrderItems(data.orders);
+    
       console.log(data.orders);
 
       setError("");
@@ -37,6 +40,19 @@ function GetOrder() {
   if (loader) {
     return <Loader />;
   }
+  const cancelOrder=async() => {
+    try {
+      const { data } = await axios.patch(
+        `${import.meta.env.VITE_API_URL}/order/cancel/${_id}`,
+        {},
+        { headers: { Authorization: `Tariq__${token}` } }
+      );
+      console.log(data);
+    getOrder();}
+      catch(err){
+        console.log(err);
+      }
+  };
   /*display data */
   return (
     <div className="orderlist">
@@ -80,6 +96,7 @@ function GetOrder() {
                 <div className="OrderStatus  text-center mt-5 col-md-12  col-lg-4 ">
                   <h5 style={{ color: "gray" }}>status </h5>
                   <h6>{e.status}...</h6>
+                  <button onClick={cancelOrder}>Cancel</button>
                 </div>
               </div>
             ))}
@@ -88,6 +105,7 @@ function GetOrder() {
       ) : (
         <p>List of Order is Empty</p>
       )}
+      
     </div>
   );
 }

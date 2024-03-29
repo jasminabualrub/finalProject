@@ -53,10 +53,10 @@ function Category() {
 				<img src={categor.image.secure_url } alt="" width={50} />
 			</div>
       {error ? <p>{error}</p> : null}
-      <div className='Products' >
+      <div className='Products  ' >
       { categoryProducts.length > 0 ?categoryProducts.map((e) => (
-        <div className="product" key={e._id}>
-          <img src={e.mainImage.secure_url} />
+        <div className="product flex-column flex-wrap" key={e._id}>
+          <img className="d-flex " style={{width:'100%'}} src={e.mainImage.secure_url} />
           <h6>{e.name}</h6>
           <p>${e.price}</p>
           <Link to={`/productdetail/${e._id}`}>
